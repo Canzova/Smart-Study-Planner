@@ -1,5 +1,6 @@
 package com.smartStudy.Planner.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.smartStudy.Planner.constants.PRIORITY;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -33,6 +35,7 @@ public class GoalDto {
     private PRIORITY priority;
 
     @NotNull(message = "Deadline cannot be null")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate deadline;
 
 }
