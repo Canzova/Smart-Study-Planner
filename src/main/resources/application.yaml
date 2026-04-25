@@ -1,6 +1,12 @@
 spring:
   application:
     name: Planner
+  security:
+    user:
+      name: nihal
+      password: nihal
+  jwt:
+    token : AEATHBCJvshudnn13253gdu83tgdbckHWU8HJNnedyyuein
 
   datasource:
     url: jdbc:h2:mem:testdb
@@ -37,3 +43,4 @@ management:
       enabled: true
     readinessstate:
       enabled: true
+

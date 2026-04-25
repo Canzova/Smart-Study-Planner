@@ -8,6 +8,7 @@ import com.smartStudy.Planner.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,7 @@ public class GoalServiceImpl implements GoalService{
 
     @Override
     @Transactional
+    @PreAuthorize("#userId == authentication.principal.id && hasRole('GUEST') && hasAuthority('user:write')")
     public GoalDto saveGoal(GoalDto goal, Long userId) {
         // Step 1 : Convert this dto into entity
         Goal goalEntity = modelMapper.map(goal, Goal.class);

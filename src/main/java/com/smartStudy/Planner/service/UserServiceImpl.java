@@ -1,6 +1,7 @@
 package com.smartStudy.Planner.service;
 
-import com.smartStudy.Planner.dto.UserDto;
+import com.smartStudy.Planner.dto.UserLoginDtoRequest;
+import com.smartStudy.Planner.dto.UserLoginDtoResponse;
 import com.smartStudy.Planner.entity.User;
 import com.smartStudy.Planner.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDto saveUser(UserDto userDto) {
+    public UserLoginDtoResponse saveUser(UserLoginDtoRequest userDto) {
         // Step 1 : Get the entity out of this dto
         User user = modelMapper.map(userDto, User.class);
 
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
         User SavedUser = userRepository.save(user);
 
         // Step 3 : Convert back into dto and return
-        return modelMapper.map(SavedUser,UserDto.class);
+        return modelMapper.map(SavedUser,UserLoginDtoResponse.class);
     }
 
 }

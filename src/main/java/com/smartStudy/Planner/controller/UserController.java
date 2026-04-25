@@ -1,6 +1,8 @@
 package com.smartStudy.Planner.controller;
 
-import com.smartStudy.Planner.dto.UserDto;
+import com.smartStudy.Planner.dto.UserLoginDtoRequest;
+import com.smartStudy.Planner.dto.UserLoginDtoResponse;
+import com.smartStudy.Planner.securtiy.AuthService;
 import com.smartStudy.Planner.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -9,16 +11,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/register")
-    ResponseEntity<UserDto> register(@RequestBody @Valid UserDto userDto) {
-        UserDto savedUserDto = userService.saveUser(userDto);
+    ResponseEntity<UserLoginDtoRequest> register(@RequestBody @Valid UserLoginDtoRequest userDto) {
+        UserLoginDtoRequest savedUserDto = authService.saveUser(userDto);
         return new ResponseEntity<>(savedUserDto, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserLoginDtoResponse> login(@RequestBody @Valid UserLoginDtoRequest userDto) {
+        UserLoginDtoResponse loggedInUser = authService.loginUser(userDto);
+        return new ResponseEntity<>(loggedInUser,HttpStatus.OK);
     }
 
 }

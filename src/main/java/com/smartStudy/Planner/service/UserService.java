@@ -1,8 +1,9 @@
 package com.smartStudy.Planner.service;
 
-import com.smartStudy.Planner.dto.UserDto;
+import com.smartStudy.Planner.dto.UserLoginDtoRequest;
+import com.smartStudy.Planner.dto.UserLoginDtoResponse;
 import jakarta.validation.Valid;
 
 public interface UserService {
-    UserDto saveUser(@Valid UserDto userDto);
+    UserLoginDtoResponse saveUser(@Valid UserLoginDtoRequest userDto);
 }
